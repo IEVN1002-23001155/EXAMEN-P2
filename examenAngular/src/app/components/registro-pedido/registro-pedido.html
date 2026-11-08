@@ -1,0 +1,16 @@
+<div class="contenedor-principal">
+  <div class="formulario-cliente">
+    <form [formGroup]="pedidoForm">
+      <app-datos-cliente [form]="pedidoForm"></app-datos-cliente>
+      <app-seleccion-pizza [form]="pedidoForm" (agregar)="agregarPizza()"></app-seleccion-pizza>
+    </form>
+  </div>
+</div>
+
+<app-detalle-pedido
+  [pizzas]="pizzasAgregadas"
+  [total]="totalPedido"
+  [puedeTerminar]="puedeTerminar"
+  (quitarPizza)="quitarPizza($event)"
+  (terminar)="terminarPedido()">
+</app-detalle-pedido>

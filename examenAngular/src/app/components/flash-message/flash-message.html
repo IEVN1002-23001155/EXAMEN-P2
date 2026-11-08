@@ -1,0 +1,8 @@
+<ng-container *ngIf="messages$ | async as messages">
+  <div class="flash-wrapper" *ngIf="messages.length">
+    <div class="flash-item" *ngFor="let msg of messages">
+      <span class="flash-icon">✓</span>
+      <span class="flash-text">{{ msg }}</span>
+    </div>
+  </div>
+</ng-container>

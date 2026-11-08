@@ -1,0 +1,38 @@
+<div class="tabla-detalle">
+  <table>
+    <thead>
+      <tr>
+        <th>Tamaño</th>
+        <th>Ingredientes</th>
+        <th>Num. Pizzas</th>
+        <th>SubTotal</th>
+        <th>Acción</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let pizza of pizzas; let i = index">
+        <td>{{ pizza.tamano }}</td>
+        <td>{{ pizza.ingredientes }}</td>
+        <td>{{ pizza.num_pizzas }}</td>
+        <td>{{ pizza.subtotal | currency:'USD':'symbol':'1.2-2' }}</td>
+        <td>
+          <button (click)="onQuitar(i)" class="btn-quitar">Quitar</button>
+        </td>
+      </tr>
+      <tr *ngIf="pizzas.length === 0">
+        <td colspan="5" style="text-align: center; padding: 20px;">
+          No hay pizzas agregadas
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="footer-tabla">
+    <h3>Total: {{ total | currency:'USD':'symbol':'1.2-2' }}</h3>
+    <button class="btn-terminar"
+            [disabled]="!puedeTerminar"
+            (click)="onTerminar()">
+      Terminar
+    </button>
+  </div>
+</div>

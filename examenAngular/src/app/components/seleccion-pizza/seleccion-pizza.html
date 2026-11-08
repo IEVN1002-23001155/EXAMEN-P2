@@ -1,0 +1,71 @@
+<ng-container [formGroup]="form">
+  <div class="fila-pizza">
+    
+    <div class="columna">
+      <p>Tamaño</p>
+      <div class="opciones-grupo">
+        <label class="tarjeta-opcion">
+          <input type="radio" value="Chica" formControlName="tamano" name="tamano">
+          <div class="contenido-opcion">
+            <span class="titulo">Chica</span>
+            <span class="precio">$40</span>
+          </div>
+        </label>
+        <label class="tarjeta-opcion">
+          <input type="radio" value="Mediana" formControlName="tamano" name="tamano">
+          <div class="contenido-opcion">
+            <span class="titulo">Mediana</span>
+            <span class="precio">$80</span>
+          </div>
+        </label>
+        <label class="tarjeta-opcion">
+          <input type="radio" value="Grande" formControlName="tamano" name="tamano">
+          <div class="contenido-opcion">
+            <span class="titulo">Grande</span>
+            <span class="precio">$120</span>
+          </div>
+        </label>
+      </div>
+    </div>
+
+    <div class="columna">
+      <p>Ingredientes Extra</p>
+      <div class="opciones-grupo" formGroupName="ingredientes">
+        <label class="tarjeta-opcion">
+          <input type="checkbox" formControlName="jamon">
+          <div class="contenido-opcion">
+            <span class="titulo">Jamón</span>
+            <span class="precio">+$10</span>
+          </div>
+        </label>
+        <label class="tarjeta-opcion">
+          <input type="checkbox" formControlName="pina">
+          <div class="contenido-opcion">
+            <span class="titulo">Piña</span>
+            <span class="precio">+$10</span>
+          </div>
+        </label>
+        <label class="tarjeta-opcion">
+          <input type="checkbox" formControlName="champinones">
+          <div class="contenido-opcion">
+            <span class="titulo">Champiñones</span>
+            <span class="precio">+$10</span>
+          </div>
+        </label>
+      </div>
+    </div>
+
+    <div class="columna columna-cantidad">
+      <p>Cantidad</p>
+      <div class="input-cantidad">
+        <input type="number" formControlName="numPizzas" min="1" step="1" placeholder="1">
+        <small class="error" *ngIf="numPizzasInvalido">
+          Ingresa un número entero mayor a 0
+        </small>
+      </div>
+      <button type="button" class="btn-agregar" (click)="onAgregar()">
+        Agregar al Pedido
+      </button>
+    </div>
+  </div>
+</ng-container>

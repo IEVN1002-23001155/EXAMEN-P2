@@ -1,0 +1,65 @@
+<div class="contenedor-amarillo">
+  <h3>Ventas del {{ tipoConsulta === 'dia' ? 'día' : 'mes' }}</h3>
+
+  <div class="controles">
+    <select [(ngModel)]="tipoConsulta" (ngModelChange)="onTipoChange()">
+      <option value="dia">Por Día</option>
+      <option value="mes">Por Mes</option>
+    </select>
+
+    <select *ngIf="tipoConsulta === 'dia'" [(ngModel)]="valorConsulta">
+      <option value="Monday">Lunes</option>
+      <option value="Tuesday">Martes</option>
+      <option value="Wednesday">Miércoles</option>
+      <option value="Thursday">Jueves</option>
+      <option value="Friday">Viernes</option>
+      <option value="Saturday">Sábado</option>
+      <option value="Sunday">Domingo</option>
+    </select>
+
+    <select *ngIf="tipoConsulta === 'mes'" [(ngModel)]="valorConsulta">
+      <option value="January">Enero</option>
+      <option value="February">Febrero</option>
+      <option value="March">Marzo</option>
+      <option value="April">Abril</option>
+      <option value="May">Mayo</option>
+      <option value="June">Junio</option>
+      <option value="July">Julio</option>
+      <option value="August">Agosto</option>
+      <option value="September">Septiembre</option>
+      <option value="October">Octubre</option>
+      <option value="November">Noviembre</option>
+      <option value="December">Diciembre</option>
+    </select>
+
+    <button type="button" (click)="consultar()">Buscar Ventas</button>
+  </div>
+
+  <ng-container *ngIf="ventas$ | async as res">
+    <ul class="lista-ventas">
+      <li *ngFor="let v of res.ventas">
+        <span (click)="verDetalle(v)" style="cursor: pointer; text-decoration: underline;">
+          {{ v.nombre_cliente }} - Total: {{ v.total | currency:'USD':'symbol':'1.2-2' }}
+        </span>
+      </li>
+    </ul>
+
+    <h2>Ventas totales del {{ tipoConsulta }}: {{ res.total | currency:'USD':'symbol':'1.2-2' }}</h2>
+  </ng-container>
+
+  <ng-container *ngIf="detalles$ | async as det">
+    <div class="detalle-venta">
+      <h4>Detalle del pedido de {{ pedidoSeleccionado }}</h4>
+      <table>
+        <tr><th>Tamaño</th><th>Ingredientes</th><th>Cantidad</th><th>Subtotal</th></tr>
+        <tr *ngFor="let d of det.detalles">
+          <td>{{ d.tamano }}</td>
+          <td>{{ d.ingredientes }}</td>
+          <td>{{ d.num_pizzas }}</td>
+          <td>{{ d.subtotal | currency:'USD':'symbol':'1.2-2' }}</td>
+        </tr>
+      </table>
+      <button type="button" (click)="cerrarDetalle()">Cerrar Detalle</button>
+    </div>
+  </ng-container>
+</div>

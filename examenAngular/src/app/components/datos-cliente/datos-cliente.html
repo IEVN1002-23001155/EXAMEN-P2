@@ -1,0 +1,28 @@
+<ng-container [formGroup]="form">
+  <div class="fila-datos">
+    <label class="input-group">
+      <span>Nombre</span>
+      <input type="text" formControlName="nombre" placeholder="Ej. Juan Pérez">
+      <small class="error" *ngIf="isInvalid('nombre')">El nombre es obligatorio</small>
+    </label>
+
+    <label class="input-group">
+      <span>Dirección</span>
+      <input type="text" formControlName="direccion" placeholder="Ej. Av. Principal 123">
+      <small class="error" *ngIf="isInvalid('direccion')">La dirección es obligatoria</small>
+    </label>
+
+    <label class="input-group">
+      <span>Teléfono</span>
+      <input type="text" formControlName="telefono" placeholder="Ej. 555-123-4567">
+      <small class="error" *ngIf="isInvalid('telefono')">El teléfono es obligatorio</small>
+    </label>
+
+    <label class="input-group">
+      <span>Fecha</span>
+      <input type="date" formControlName="fecha">
+      <small class="error" *ngIf="isInvalid('fecha') && !form.get('fecha')?.hasError('anioInvalido')">La fecha es obligatoria</small>
+      <small class="error" *ngIf="form.get('fecha')?.hasError('anioInvalido')">El año no puede tener más de 4 dígitos</small>
+    </label>
+  </div>
+</ng-container>
